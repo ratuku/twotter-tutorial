@@ -7,7 +7,7 @@
 
 
         <div class="create-twoot-panel__submit">
-            <div class="create-twoot-type ">
+            <div class="create-twoot-type">
                 <label for="newTwootType"><strong>Type: </strong></label>
                 <select id="newTwootType" v-model="selectedTwootType">
                     <option v-for="(option,index) in twootTypes"
@@ -17,11 +17,12 @@
                     </option>
                 </select>
             </div>
-        </div>
 
-        <button>
-            Twoot!
-        </button>
+            <button>
+                Twoot!
+            </button>
+
+        </div>
     </form>
 </template>
 
@@ -63,7 +64,7 @@
 
         textarea {
             border: 1px solid #DFE3E8;
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
         .create-twoot-panel__submit {
@@ -71,7 +72,7 @@
             justify-content: space-around;
 
             .create-twoot-type {
-                padding: 10px 0;
+                padding: 10px 0px;
             }
 
             button {
