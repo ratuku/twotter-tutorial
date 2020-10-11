@@ -11,51 +11,26 @@
             <div class="user-profile__follower-count">
                 <strong>Followers: </strong> {{ followers }}
             </div>
-
-            <form class="user-profile__create-twoot" @submit.prevent="createNewTwoot"
-                  :class="{'--exceeded': newTwootCharacterCoount> 180}">
-                <label for="newTwoot"><strong>New twoot</strong>
-                    ({{newTwootCharacterCoount}})/180 </label>
-                <textarea id="newTwoot" v-model="newTwootContent"></textarea>
-
-
-                <div class="user-profile__create-twoot-type">
-                    <label for="newTwootType"><strong>Type: </strong></label>
-                    <select id="newTwootType" v-model="selectedTwootType">
-                        <option v-for="(option,index) in twootTypes"
-                                :value="option.value"
-                                :key="index"
-                                >
-                            {{option.name}}
-                        </option>
-                    </select>
-                </div>
-
-                <button>
-                    Twoot!
-                </button>
-            </form>
-
-
+            <create-twoot-panel @add-twoot="addTwoot"/>
         </div>
         <div class="user-profile__twoots-wrapper">
             <Twootitem
                 v-for="twoot in user.twoots"
                 :key="twoot.id"
                 :username="user.username"
-                :twoot="twoot"
-                @favourite="toggleFavourite"/>
+                :twoot="twoot"/>
         </div>
     </div>
 </template>
 
 <script>
     //import HelloWorld from './components/HelloWorld.vue'
+    import Twootitem  from "./Twootitem";
+    import CreateTwootPanel from "./CreateTwootPanel";
 
-    import Twootitem from "./Twootitem";
     export default {
         name: 'UserProfile',
-        components: {Twootitem},
+        components: {CreateTwootPanel, Twootitem},
         data(){
             return {
                 followers: 0,
@@ -70,47 +45,17 @@
                         {id: 1, content: 'Twoot is Amazing!'},
                         {id: 2, content: "Don't forget to subscriber to the Earth is Square!"}
                     ]
-                },
-                twootTypes: [
-                    {value: 'draft', name: 'Draft'},
-                    {value: 'instant', name: 'Instant Twoot'}
-                ],
-                newTwootContent: '',
-                selectedTwootType: 'instant'
-            }
-        },
-        computed: {
-            newTwootCharacterCoount() {
-                return this.newTwootContent.length;
-            }
-        },
-        watch: {
-            // same name as what u want to watch
-            followers(newFollowCount, oldFollowCount){
-
-                if(oldFollowCount < newFollowCount) console.log(`${this.user.username}
-      has gained a follower!`);
-            }
-        },
-        methods: {
-            followUser() {
-                this.followers++
-            },
-            toggleFavourite(id) {
-                console.log(`Favourite Tweet #${id}`);
-            },
-            createNewTwoot(){
-                if (this.newTwootContent && this.selectedTwootType !=='draft') {
-                    this.user.twoots.unshift({
-                        id: this.user.twoots.length+1,
-                        content: this.newTwootContent
-                    })
-                    this.newTwootContent='';
                 }
             }
         },
-        mounted() {
-            this.followUser();
+        methods: {
+            addTwoot(twoot) {
+                console.log("twwot: " + twoot);
+                this.user.twoots.unshift({
+                    id: this.user.twoots.length + 1,
+                    content: twoot.content
+                })
+            }
         }
     }
     // scope makes csss only for this component
