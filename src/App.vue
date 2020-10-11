@@ -1,54 +1,17 @@
 <template>
   <div id="app">
-    @{{user.username}} - {{fullName}}
-    <string>followers: </string> {{followers}}
-    <br>
-    <br>
-    <button v-on:click="followUser">
-      Follow
-    </button>
+    <UserProfile/>
   </div>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 
+import UserProfile from "./components/UserProfile";
+
 export default {
   name: 'App',
-  data(){
-    return {
-      followers: 0,
-      user: {
-        id: 1,
-        username: '_JosueNsumba',
-        firstName: 'Josue',
-        lastName: 'Nsumba',
-        email: 'josuensumba@gmail.com',
-        isAdmin: true
-      }
-    }
-  },
-  computed: {
-    fullName() {
-      return `${this.user.firstName} ${this.user.lastName}`
-    }
-  },
-  watch: {
-    // same name as what u want to watch
-    followers(newFollowCount, oldFollowCount){
-
-      if(oldFollowCount < newFollowCount) console.log(`${this.user.username}
-      has gained a follower!`);
-    }
-  },
-  methods: {
-    followUser() {
-      this.followers++
-    }
-  },
-  mounted() {
-    this.followUser();
-  }
+  components: {UserProfile}
 }
 </script>
 
@@ -58,6 +21,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  flex-direction: column;
+  min-height: 100vh;
+  background-color: #F3F5FA;
 }
 </style>
