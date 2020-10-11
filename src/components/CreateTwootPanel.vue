@@ -3,14 +3,14 @@
           :class="{'--exceeded': newTwootCharacterCoount> 180}">
         <label for="newTwoot"><strong>New twoot</strong>
             ({{newTwootCharacterCoount}})/180 </label>
-        <textarea id="newTwoot" rows="4" v-model="newTwootContent"></textarea>
+        <textarea id="newTwoot" rows="4" v-model="state.newTwootContent"></textarea>
 
 
         <div class="create-twoot-panel__submit">
             <div class="create-twoot-type">
                 <label for="newTwootType"><strong>Type: </strong></label>
-                <select id="newTwootType" v-model="selectedTwootType">
-                    <option v-for="(option,index) in twootTypes"
+                <select id="newTwootType" v-model="state.selectedTwootType">
+                    <option v-for="(option,index) in state.twootTypes"
                             :value="option.value"
                             :key="index">
                         {{option.name}}
@@ -27,29 +27,34 @@
 </template>
 
 <script>
+    import  {reactive} from 'vue'
+    import {computed} from "@vue/reactivity";
     export default {
         name: "CreateTwootPanel",
-        data () {
-            return {
+        setup(props, ctx) {
+            const state = reactive({
                 twootTypes: [
                     {value: 'draft', name: 'Draft'},
                     {value: 'instant', name: 'Instant Twoot'}
                 ],
                 newTwootContent: '',
                 selectedTwootType: 'instant'
+            })
+
+            const newTwootCharacterCoount = computed(() => (state.newTwootContent.length));
+            function createNewTwoot(){
+                console.log("newTwootContent: " + state.newTwootContent);
+                    if (state.newTwootContent && state.selectedTwootType !=='draft') {
+                        console.log("ctx.emit: ");
+                        ctx.emit('add-twoot', state.newTwootContent);
+                        state.newTwootContent='';
+                    }
             }
-        },
-        methods: {
-            createNewTwoot(){
-                if (this.newTwootContent && this.selectedTwootType !=='draft') {
-                    this.$emit('add-twoot', this.newTwootContent)
-                    this.newTwootContent='';
-                }
-            }
-        },
-        computed: {
-            newTwootCharacterCoount() {
-                return this.newTwootContent.length;
+
+            return {
+                state,
+                newTwootCharacterCoount,
+                createNewTwoot
             }
         }
     }

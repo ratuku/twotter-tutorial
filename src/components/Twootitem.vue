@@ -23,11 +23,6 @@
                 type: Object,
                 required: true
             }
-        },
-        methods: {
-            favouriteTwoot(id) {
-                this.$emit('favourite', id)
-            }
         }
     };
     // scope makes csss only for this component
