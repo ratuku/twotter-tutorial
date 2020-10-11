@@ -1,21 +1,14 @@
-{
-  "users": [
+export const users =   [
     {
-      "id": 1,
-      "username": "_MitchellRomney",
-      "firstName": "Mitchell",
-      "lastName": "Romney",
-      "email": "mitchellromney@theearthissquare.com",
-      "isAdmin": true,
-      "twoots": [
-        {
-          "id": 1,
-          "content": "Twotter is Amazing!"
-        },
-        {
-          "id": 2,
-          "content": "Don't forget to subscriber to The Earth is Square!"
-        }
+      id: 1,
+      username: '_JosueNsumba',
+      firstName: 'Josue',
+      lastName: 'Nsumba',
+      email: 'josuensumba@gmail.com',
+      isAdmin: true,
+      twoots: [
+        {id: 1, content: 'Twoot is Amazing!'},
+        {id: 2, content: "Don't forget to subscriber to the Earth is Square!"}
       ]
     },
     {
@@ -46,4 +39,3 @@
       "twoots": []
     }
   ]
-}
