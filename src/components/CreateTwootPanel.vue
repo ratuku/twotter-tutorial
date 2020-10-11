@@ -41,10 +41,7 @@
         methods: {
             createNewTwoot(){
                 if (this.newTwootContent && this.selectedTwootType !=='draft') {
-                    this.user.twoots.unshift({
-                        id: this.user.twoots.length+1,
-                        content: this.newTwootContent
-                    })
+                    this.$emit('add-twoot', this.newTwootContent)
                     this.newTwootContent='';
                 }
             }

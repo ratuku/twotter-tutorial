@@ -1,24 +1,23 @@
 <template>
     <div class="user-profile">
+        <div class="user-profile__sidebar">
         <div class="user-profile__user-panel">
             <h1 class="user-profile__username">@{{user.username}}</h1>
             <div class="user-profile__admin-badge" v-if="user.isAdmin">
                     Admin
-            </div>
-            <div class="user-profile__admin-badge" v-else>
-                Not Admin
             </div>
             <div class="user-profile__follower-count">
                 <strong>Followers: </strong> {{ followers }}
             </div>
             <create-twoot-panel @add-twoot="addTwoot"/>
         </div>
+    </div>
         <div class="user-profile__twoots-wrapper">
             <Twootitem
-                v-for="twoot in user.twoots"
-                :key="twoot.id"
-                :username="user.username"
-                :twoot="twoot"/>
+                    v-for="twoot in user.twoots"
+                    :key="twoot.id"
+                    :username="user.username"
+                    :twoot="twoot"/>
         </div>
     </div>
 </template>
@@ -53,7 +52,7 @@
                 console.log("twwot: " + twoot);
                 this.user.twoots.unshift({
                     id: this.user.twoots.length + 1,
-                    content: twoot.content
+                    content: twoot
                 })
             }
         }
@@ -90,28 +89,12 @@
                 font-weight: bold;
                 margin-top: 5px;
             }
-
-            .user-profile__create-twoot {
-
-                display: flex;
-                flex-direction: column;
-                padding-top: 10px;
-
-                &.--exceeded {
-                    color: red;
-                    border-color: red;
-                    button {
-                        background-color: red;
-                        border: none;
-                        color: white;
-                    }
-                }
-            }
         }
 
         .user-profile__twoots-wrapper {
             display: grid;
             grid-gap: 10px;
+            margin-bottom: auto;
         }
     }
 
