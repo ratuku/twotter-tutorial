@@ -7,7 +7,7 @@
         </div>
       </router-link>
       <div class="navigation__user">
-        {{state.user.username}}
+        {{user.username}}
       </div>
     </nav>
 
@@ -20,19 +20,20 @@
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 
-import {reactive} from 'vue'
+//import {reactive} from 'vue'
+import {useStore} from 'vuex'
+import {computed} from 'vue'
 
 export default {
   name: 'App',
   setup() {
-    const state = reactive({
-        user: {
-          username: '_JosueNsumba'
-        }
-    })
+    const store = useStore();
+    const user = computed(()=> store.state.user);
+
+    console.log("user: ", user);
 
     return {
-      state
+      user
     }
   }
 }
