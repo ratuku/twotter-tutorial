@@ -30,9 +30,10 @@
             }
         }
     };
+    // scope makes csss only for this component
 </script>
 
-<style>
+<style lang="scss" scoped>
 
     .twoot-item {
         padding: 28px;
@@ -44,14 +45,16 @@
         transition: all 0.25s ease;
         margin-top: 5px;
         margin-right: 70px;
+
+        &:hover {
+            transform: scale(1.1, 1.1);
+        }
+
+        .twoot-item__user {
+            font-weight: bold;
+        }
     }
 
-    .twoot-item:hover {
-        transform: scale(1.1, 1.1);
-    }
 
-    .twoot-item__user {
-        font-weight: bold;
-    }
 
 </style>

@@ -111,45 +111,53 @@
             this.followUser();
         }
     }
+    // scope makes csss only for this component
 </script>
 
-<style>
+<style lang="scss" scoped>
 
     .user-profile {
         display: grid;
         grid-template-columns: 1fr 3fr;
         width: 100%;
         padding: 50px 5%;
+
+        .user-profile__user-panel {
+            display: flex;
+            flex-direction: column;
+            margin-right: 50px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #DFE3E8;
+
+            h1 {
+                margin: 2px;
+            }
+
+            .user-profile__admin-badge {
+                background: rebeccapurple;
+                color: white;
+                border-radius: 5px;
+                margin-right: auto;
+                padding: 0px 10px;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+
+            .user-profile__create-twoot {
+
+                display: flex;
+                flex-direction: column;
+                padding-top: 10px;
+            }
+        }
+
+        .user-profile__twoots-wrapper {
+            display: grid;
+            grid-gap: 10px;
+        }
     }
 
-    .user-profile__user-panel {
-        display: flex;
-        flex-direction: column;
-        margin-right: 50px;
-        padding: 20px;
-        background-color: white;
-        border-radius: 5px;
-        border: 1px solid #DFE3E8;
-    }
 
-    .user-profile__admin-badge {
-        background: rebeccapurple;
-        color: white;
-        border-radius: 5px;
-        margin-right: auto;
-        padding: 0px 10px;
-        font-weight: bold;
-        margin-top: 5px;
-    }
-
-    .user-profile__create-twoot {
-
-        display: flex;
-        flex-direction: column;
-        padding-top: 10px;
-    }
-
-    h1 {
-        margin: 2px;
-    }
 </style>
