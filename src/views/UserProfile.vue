@@ -24,8 +24,8 @@
 
 <script>
     //import HelloWorld from './components/HelloWorld.vue'
-    import Twootitem  from "./Twootitem";
-    import CreateTwootPanel from "./CreateTwootPanel";
+    import Twootitem  from "../components/Twootitem";
+    import CreateTwootPanel from "../components/CreateTwootPanel";
     import {reactive} from 'vue';
 
     export default {

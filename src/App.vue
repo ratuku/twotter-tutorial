@@ -9,19 +9,19 @@
       </div>
     </nav>
 
-    <UserProfile/>
+    <router-view>
+    </router-view>
+
   </div>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 
-import UserProfile from "./components/UserProfile";
 import {reactive} from 'vue'
 
 export default {
   name: 'App',
-  components: {UserProfile},
   setup() {
     const state = reactive({
         user: {
