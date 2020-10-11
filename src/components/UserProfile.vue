@@ -1,7 +1,7 @@
 <template>
     <div class="user-profile">
         <div class="user-profile__user-panel">
-            <H1 class="user-profile__username">@{{user.username}}</H1>
+            <h1 class="user-profile__username">@{{user.username}}</h1>
             <div class="user-profile__admin-badge" v-if="user.isAdmin">
                     Admin
             </div>
@@ -11,6 +11,30 @@
             <div class="user-profile__follower-count">
                 <strong>Followers: </strong> {{ followers }}
             </div>
+
+            <form class="user-profile__create-twoot" @submit.prevent="createNewTwoot">
+                <label for="newTwoot"><strong>Create twoot</strong> </label>
+                <textarea id="newTwoot" v-model="newTwootContent"></textarea>
+
+
+                <div class="user-profile__create-twoot-type">
+                    <label for="newTwootType"><strong>Type: </strong></label>
+                    <select id="newTwootType" v-model="selectedTwootType">
+                        <option v-for="(option,index) in twootTypes"
+                                :value="option.value"
+                                :key="index"
+                                >
+                            {{option.name}}
+                        </option>
+                    </select>
+                </div>
+
+                <button>
+                    Twoot!
+                </button>
+            </form>
+
+
         </div>
         <div class="user-profile__twoots-wrapper">
             <Twootitem
@@ -44,7 +68,13 @@
                         {id: 1, content: 'Twoot is Amazing!'},
                         {id: 2, content: "Don't forget to subscriber to the Earth is Square!"}
                     ]
-                }
+                },
+                twootTypes: [
+                    {value: 'draft', name: 'Draft'},
+                    {value: 'instant', name: 'Instant Twoot'}
+                ],
+                newTwootContent: '',
+                selectedTwootType: 'instant'
             }
         },
         computed: {
@@ -66,6 +96,15 @@
             },
             toggleFavourite(id) {
                 console.log(`Favourite Tweet #${id}`);
+            },
+            createNewTwoot(){
+                if (this.newTwootContent && this.selectedTwootType !=='draft') {
+                    this.user.twoots.unshift({
+                        id: this.user.twoots.length+1,
+                        content: this.newTwootContent
+                    })
+                    this.newTwootContent='';
+                }
             }
         },
         mounted() {
@@ -101,6 +140,13 @@
         padding: 0px 10px;
         font-weight: bold;
         margin-top: 5px;
+    }
+
+    .user-profile__create-twoot {
+
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
     }
 
     h1 {
