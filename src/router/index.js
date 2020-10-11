@@ -34,12 +34,12 @@ const router = createRouter({
 router.beforeEach(async  (to,
                           from,
                           next) => {
-  const user = store.state.user;
+  const user = store.state.User.user;
 
   if (!user) {
     // functions you use to run actions
     //console.log(users);
-    await store.dispatch('setUser', users[0]);
+    await store.dispatch('User/setUser', users[0]);
   }
 
   const isAdmin = true;
